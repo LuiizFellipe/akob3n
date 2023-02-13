@@ -6,16 +6,16 @@
       <div v-for="x in banners"  :key="x.id">
         <img class="img-filmes" :src="x.large_cover_image" alt="">
         <p>{{x.title_long}}</p>
-       <router-link :to="{name: 'movie', paams:{id: x.id}}">Ver filme</router-link>
+       <router-link :to="{name: 'movie', params:{id: x.id}}">Ver filme</router-link>
       </div>
     </div>
     <section style="background-color: #1d1d1d;padding-top: 50px;">
-      <h3 style="text-align: left;color: white;padding-left: 20px;pad      ">Mais famosos</h3>
+      <h3 style="text-align: left;color: white;padding-left: 20px;">Mais famosos</h3>
       <div class="famoso">
-      <div v-for="x in download"  :key="x.id">
-        <img class="img-filmes" :src="x.large_cover_image" alt="">
-        <p>{{x.title_long}}</p>
-        <p>{{x.genres}}</p>
+      <div v-for="y in download"  :key="y.id">
+        <img class="img-filmes" :src="y.large_cover_image" alt="">
+        <p>{{y.title_long}}</p>
+        <p>{{y.genres}}</p>
       </div>
     </div>
     </section>
