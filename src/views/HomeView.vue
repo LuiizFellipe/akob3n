@@ -6,7 +6,7 @@
       <div v-for="x in banners"  :key="x.id">
         <img class="img-filmes" :src="x.large_cover_image" alt="">
         <p>{{x.title_long}}</p>
-        <router-link :to="{name: 'movie', params:{id: x.id}}">Ver filme</router-link>
+       <router-link :to="{name: 'movie', paams:{id: x.id}}">Ver filme</router-link>
       </div>
     </div>
     <section style="background-color: #1d1d1d;padding-top: 50px;">
@@ -31,6 +31,7 @@ export default {
     return {
       banners: [],
       download: [],
+      generos:this.downloadgenres
     };
   },
   methods: {

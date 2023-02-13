@@ -20,11 +20,11 @@
     "vue": "^2.7.14",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2",
-    "webtorrent": "^2.0.12"
+    "webtorrent": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
+    "@babel/core": "^7.20.0",
+    "@babel/eslint-parser": "^7.20.0",
     "@babel/plugin-syntax-import-assertions": "^7.20.0",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",

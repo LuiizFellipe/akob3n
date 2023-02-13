@@ -12,37 +12,45 @@
                         <img src="../assets/logo-imdb.svg"> {{ dataMovie.rating }}
                     </div>
                 </a>
-                <button class="watch">Watch</button>
+                <button @click="downloadTorrent" class="watch">Watch</button>
                 <div class="descricao">
                     <p>{{ dataMovie.description_full }}</p>
                 </div>
-                <video>
-                    aqui
-                </video>
+                <p>
+                    {{ arq }}
+                </p>
             </b-col>
-            <b-col>3 of 3</b-col>
+            <b-col>
+                <video ref="videoPlayer" controls />
+            </b-col>
         </b-row>
     </b-container>
 </template>
 
 <script>
 import axios from 'axios';
-
-
+import WebTorrent from 'webtorrent/dist/webtorrent.min.js'
 export default {
+    name: 'VideoPlayer',
     data() {
         return {
             idMovie: this.$route.params.id,
             dataMovie: [],
+            arq: "123",
+            //client: new WebTorrent(),
             idTorrent: "",
+            magnetURI: "https://yts.mx/torrent/download/3924C0D622FB1ED5E0D6F6CCDBF8529FB7916E2B",
         };
     },
     created() {
-            this.getMovie();
-        },
+        this.getMovie();
+    },
+    mounted() {
+
+    },
     methods: {
         async getMovie() {
-                 axios.get('https://yts.mx/api/v2/movie_details.json?movie_id=' + this.idMovie)
+            axios.get('https://yts.mx/api/v2/movie_details.json?movie_id=' + this.idMovie)
                 .then(getMetaMovie => {
                     console.log(getMetaMovie.data);
                     this.dataMovie = getMetaMovie.data.data.movie;
@@ -53,19 +61,29 @@ export default {
                     console.log("nao foi")
                 })
         },
-        watch(){
+        downloadTorrent() {
+            const client = new WebTorrent()
+            client.add(this.magnetURI, torrent => {
+                console.log('Client is downloading:', torrent.infoHash)
+                for (const file of torrent.files) {
+                    document.body.append(file.name)
+                }
+            })
+        },
+        watch() {
             alert('12');
         },
+
     },
-        computed: {
-            hours() {
-                return Math.floor(this.dataMovie.runtime / 60);
-            },
-            minutes() {
-                return this.dataMovie.runtime % 60;
-            }
+    computed: {
+        hours() {
+            return Math.floor(this.dataMovie.runtime / 60);
+        },
+        minutes() {
+            return this.dataMovie.runtime % 60;
         }
     }
+}
 
 </script>
 <style>
