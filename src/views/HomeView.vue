@@ -1,6 +1,6 @@
 
 <template>
-  <main style="padding: 20px;">
+  <main class="main" style="padding: 20px;">
     <h3 style="text-align: left;color: white;padding-left: 20px;">Recentes</h3>
     <div class="filmes">
       <div v-for="x in banners"  :key="x.id">
@@ -31,7 +31,6 @@ export default {
     return {
       banners: [],
       download: [],
-      generos:this.downloadgenres
     };
   },
   methods: {

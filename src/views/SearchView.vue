@@ -4,6 +4,7 @@
       <h2>Pesquisar</h2>
       <input v-model="inputValue" class="search-item">
       <h3>{{ inputValue }}</h3>
+      <h3>{{ valor }}</h3>
       <button @click="getSearch">
        Procurar
       </button>
@@ -25,7 +26,8 @@
   export default {
     data() {
       return {
-        inputValue: '',
+        inputValue: this.valor,
+        valor: this.$route.params.query,
         searchItens: [],
         generos:this.downloadgenres
       };
