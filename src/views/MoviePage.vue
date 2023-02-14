@@ -1,5 +1,5 @@
 <template>
-    <b-container class="bv-example-row movie">
+    <b-container class="main movie">
         <b-row>
             <b-col><img class="img-filme" :src="dataMovie.large_cover_image"></b-col>
             <b-col class="metaDados">
@@ -28,6 +28,9 @@
 </template>
 
 <script>
+
+
+
 import axios from 'axios';
 import WebTorrent from 'webtorrent/dist/webtorrent.min.js'
 export default {
@@ -44,6 +47,7 @@ export default {
     },
     created() {
         this.getMovie();
+        this.checkRoute();
     },
     mounted() {
 
