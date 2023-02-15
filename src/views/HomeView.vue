@@ -9,13 +9,26 @@
        <router-link :to="{name: 'movie', params:{id: x.id}}">Ver filme</router-link>
       </div>
     </div>
-    <section style="background-color: #1d1d1d;padding-top: 50px;">
+    <section style="background-color: #1d1d1d;padding-top: 50px; overflow: hidden; min-height: 400px">
       <h3 style="text-align: left;color: white;padding-left: 20px;">Mais famosos</h3>
       <div class="famoso">
-      <div v-for="y in download"  :key="y.id">
+      <div class="item-filme" v-for="y in download"  :key="y.id">
+        <div class="overlay-img"></div>
         <img class="img-filmes" :src="y.large_cover_image" alt="">
-        <p>{{y.title_long}}</p>
-        <p>{{y.genres}}</p>
+        <p class="titulo-filme">{{y.title_long}}</p>
+        <div class="filme-descricao">
+        <div class="col-1">
+          <img class="img-filmes" :src="y.large_cover_image" alt="">
+          <p>Avaliação: {{y.rating}}</p>
+          <router-link :to="{name: 'movie', params:{id: y.id}}">Assistir</router-link>
+        </div>
+        <div class="col-2">
+          <div class="gen">
+            <p v-for="gen in y.genres" :key="gen.id">{{gen}}</p>
+          </div>
+          <p class="sinopse">{{y.summary}}</p>
+        </div>
+        </div>
       </div>
     </div>
     </section>
@@ -63,6 +76,25 @@ export default {
 </script>
 
 <style>
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 4px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 .famoso{
   flex-direction: row;
   display: flex;
@@ -71,20 +103,117 @@ export default {
   width:100px;
   height: 100px;
 }
-.famoso div{
-  background-color: #eaeaea;
-  border-radius: 20px;
+.famoso p{
+  font-size: 12px;
+  color: #fff;
+  margin-top:10px;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+}
+.item-filme {
+  display: flex;
+  align-items: bottom;
+  position: relative;
+  border-radius: 15px;
   padding: 10px;
   margin-left:5px;
   text-align: left;
   width: 400px;
   margin-right: 5px;
+  min-height: 250px;
+  cursor: pointer;
+  align-items: flex-end;
+  transition: all 0.3s ease-in-out;
 }
-.famoso p{
-  font-size: 12px;
-  color: black;
-  margin-top:10px;
-  font-weight: bold;
+.item-filme .titulo-filme {
+  font-size: 18px;
+}
+.item-filme .img-filmes {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+.item-filme .overlay-img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  z-index: 2;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
+}
+.item-filme .filme-descricao {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: auto;
+  background-color: #232C3B;
+  border-radius: 10px;
+  transform: translateX(100vw);
+  width: 420px;
+  height: 300px;
+  z-index: 5;
+  opacity: 0;
+  transition: all 0s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+.item-filme:nth-last-child(1) .filme-descricao {
+  top: 0px;
+  right: 0px;
+  left: auto;
+}
+.item-filme .filme-descricao .col-1 {
+  width: 30%;
+  padding: 10px;
+}
+.item-filme .filme-descricao .col-2 {
+  width: 70%;
+  padding: 10px;
+}
+.item-filme .filme-descricao .col-1 .img-filmes {
+  position: relative;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.item-filme .filme-descricao .col-1 a {
+  width: 100%;
+  color: #fff;
+  background-color: #4D30D5;
+  padding: 5px 12px;
+  border-radius: 7px;
+  text-decoration: none;
+}
+.item-filme .filme-descricao .col-2 .gen p {
+  display: inline;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-top: -5px
+}
+.item-filme .filme-descricao .col-2 .gen p:after {
+  content: ",";
+  margin-right: 5px;
+}
+.item-filme .filme-descricao .col-2 .gen p:nth-last-child(1):after {
+  content: "";
+}
+.item-filme .filme-descricao .col-2 .sinopse {
+  overflow: auto;
+}
+.item-filme:hover .filme-descricao {
+  opacity: 1;
+  transform: translateX(0%);
 }
 .filmes {
   display: flex;
@@ -114,7 +243,7 @@ export default {
 }
 .img-filmes{
   border-radius: 20px;
-  width: 95%;
+  width: 100%;
   object-fit: cover;
   height: 300px;
   margin-left:5px;
