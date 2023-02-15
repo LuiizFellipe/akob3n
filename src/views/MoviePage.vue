@@ -16,23 +16,20 @@
                 <div class="descricao">
                     <p>{{ dataMovie.description_full }}</p>
                 </div>
-                <p>
-                    {{ arq }}
-                </p>
             </b-col>
             <b-col>
-                <video ref="videoPlayer" controls />
+                <div class="files"></div>
+                <p>Diretiva v-html: <span v-html="arq"></span></p>
             </b-col>
         </b-row>
     </b-container>
 </template>
 
 <script>
-
-
-
 import axios from 'axios';
 import WebTorrent from 'webtorrent/dist/webtorrent.min.js'
+
+var client = new WebTorrent()
 export default {
     name: 'VideoPlayer',
     data() {
@@ -40,7 +37,6 @@ export default {
             idMovie: this.$route.params.id,
             dataMovie: [],
             arq: "123",
-            //client: new WebTorrent(),
             idTorrent: "",
             magnetURI: "https://yts.mx/torrent/download/3924C0D622FB1ED5E0D6F6CCDBF8529FB7916E2B",
         };
@@ -50,7 +46,7 @@ export default {
         this.checkRoute();
     },
     mounted() {
-
+        
     },
     methods: {
         async getMovie() {
@@ -59,6 +55,7 @@ export default {
                     console.log(getMetaMovie.data);
                     this.dataMovie = getMetaMovie.data.data.movie;
                     this.idTorrent = getMetaMovie.data.data.movie.torrents[0].url;
+
                 })
                 .catch(error => {
                     console.log(error)
@@ -66,13 +63,14 @@ export default {
                 })
         },
         downloadTorrent() {
-            const client = new WebTorrent()
-            client.add(this.magnetURI, torrent => {
-                console.log('Client is downloading:', torrent.infoHash)
-                for (const file of torrent.files) {
-                    document.body.append(file.name)
-                }
-            })
+            const torrentId = 'https://yts.mx/torrent/download/3924C0D622FB1ED5E0D6F6CCDBF8529FB7916E2B';
+            client.add(torrentId, (torrent) => {
+                console.log('Client is downloading:', torrent.infoHash);
+                const file = torrent.files.find(function (file) {
+                    return file.name.endsWith('.mp4')
+                })
+                file.renderTo('.files')
+            });
         },
         watch() {
             alert('12');
