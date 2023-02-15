@@ -26,7 +26,7 @@
           <div class="gen">
             <p v-for="gen in y.genres" :key="gen.id">{{gen}}</p>
           </div>
-          <p class="sinopse">{{y.summary}}</p>
+          <p class="sinopse 0">{{y.summary}}</p>
         </div>
         </div>
       </div>
