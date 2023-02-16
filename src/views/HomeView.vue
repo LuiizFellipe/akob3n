@@ -270,7 +270,7 @@ export default {
   transition: opacity 0.3s ease-in-out;
 }
 .item-filme:nth-last-child(1) .filme-descricao,
-.item-filme:nth-last-child(2) .filme-descricao {
+.item-filme:nth-last-child(2) .filme-descricao{
   top: 0px;
   right: 0px;
   left: auto;

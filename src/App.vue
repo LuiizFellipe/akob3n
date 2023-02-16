@@ -75,7 +75,7 @@ nav a {
   width: 85%;
 }
 
-#app {
+#app{
   background-color: #1a1a1a;
 }
 </style>
