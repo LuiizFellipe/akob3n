@@ -76,6 +76,6 @@ nav a {
 }
 
 #app {
-  background-color: #1c1c1c;
+  background-color: #1a1a1a;
 }
 </style>
