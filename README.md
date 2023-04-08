@@ -3,7 +3,7 @@
 ## Projeto
 Assistir filmes online igual a netflix
 
-AXIOS + VueJs + VueX + Vue Router + VueBoostrap
+AXIOS + VueJs + VueX + Vue Router + VueBoostrap + Electronjs
 
 ## Requisitos
 
