@@ -1,24 +1,23 @@
-# akob3n
+# AKOB3N
 
-## Project setup
-```
-npm install
+## Projeto
+Assistir filmes online igual a netflix
+
+AXIOS + VueJs + VueX + Vue Router + VueBoostrap
+
+## Requisitos
+
+Node.js
+VueCLI
+
+## Configuração
+
+```js
+
+npm i
 ```
 
-### Compiles and hot-reloads for development
-```
+```js
+
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
